@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso Thatscam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #121214;
+      --surface: #1a1a1e;
+      --surface-2: #26262b;
+      --text: #f5f5f7;
+      --muted: #a1a1aa;
+      --primary: #e11d48;
+      --primary-dark: #be123c;
+      --line: #2e2e35;
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; border-radius: var(--radius); }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(100% - 2rem, var(--max));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1rem;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(18, 12, 20, 0.85);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), #06b6d4);
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: var(--surface-2);
+      color: var(--primary);
+      outline: none;
+    }
+
+    .hero {
+      padding: 5rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(6, 182, 212, 0.15);
+      color: #22d3ee;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.08;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5vw, 4.8rem);
+      margin-bottom: 1rem;
+      max-width: 12ch;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 58ch;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--primary-dark);
+      outline: none;
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: var(--surface);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      border-color: var(--primary);
+      color: var(--primary);
+      outline: none;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 1.4rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .hero-card strong { display: block; margin-bottom: 0.35rem; }
+    .hero-card p { margin: 0; font-size: 0.96rem; }
+
+    section {
+      padding: 2.5rem 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-head p { color: var(--muted); max-width: 55ch; }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(225, 29, 72, 0.1);
+      color: #fb7185;
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .gallery figure {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .gallery figcaption {
+      padding: 0.9rem 1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .pricing-wrap {
+      overflow-x: auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    table { min-width: 720px; }
+    th, td {
+      padding: 1rem 1.1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      background: var(--surface-2);
+      font-size: 0.95rem;
+    }
+    tbody tr:nth-child(even) { background: rgba(6, 182, 212, 0.02); }
+    tbody tr:hover { background: rgba(6, 182, 212, 0.06); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1.5rem;
+    }
+
+    .contact-box,
+    form {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    label {
+      display: grid;
+      gap: 0.4rem;
+      font-weight: 500;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid rgba(6, 182, 212, 0.3);
+      border-color: #06b6d4;
+    }
+
+    input::placeholder,
+    textarea::placeholder { color: #6b6b76; }
+
+    .contact-box ul {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 1.4rem;
+    }
+
+    .top-link {
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .top-link:hover {
+      color: var(--primary-dark);
+    }
+
+    .note {
+      margin-top: 0.8rem;
+      padding: 1rem;
+      background: var(--surface-2);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .contact-grid,
+      .benefits,
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid > :first-child,
+      .contact-grid > :first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav,
+      .section-head,
+      .footer-line {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        padding-top: 3rem;
+      }
+
+      .hero-grid,
+      .benefits,
+      .gallery,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        gap: 0.45rem;
+      }
+
+      h1 {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header" id="topo">
+    <div class="container nav">
+      <a class="brand" href="#topo">
+        <span class="brand-mark">TS</span>
+        <span>Curso Thatscam</span>
+      </a>
+
+      <nav aria-label="Principal">
+        <ul class="nav-links">
+          <li><a href="#beneficios">Benefícios</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Faça seus cursos hoje mesmo</span>
+          <h1>O unico curso sobre como fazer cursos</h1>
+          <p>
+            Este curso foi projetado pra servir de base para os alunos criarem seus proprios cursos,
+            tendo materias como: scamming, ebook-making, UX, phishing, trojan entre outros.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="#planos">Ver planos</a>
+            <a class="btn btn-secondary" href="#contato">Falar com a equipe</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Cartão de destaque">
+          <img
+            src="https://chiptronic.com.br/blog/wp-content/uploads/2018/12/7-Cursos-para-chaveiros.jpg"
+            alt="Ambiente de trabalho extremamente profissional"
+            width="400"
+            height="400"
+            loading="lazy"
+          />
+          <strong>Destaques do curso</strong>
+          <p>trabalho em equipe avançado, scamming em grupo, ebooks que parecem reais e etc</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>O que os alunos podem praticar</h2>
+          </div>
+        </div>
+
+        <div class="benefits">
+          <article class="card">
+            <div class="icon">01</div>
+            <h3>Malware</h3>
+            <p>Criar programas maliciosos dentro do curso, para ganhar mais dinheiro.</p>
+          </article>
+          <article class="card">
+            <div class="icon">02</div>
+            <h3>Phishing</h3>
+            <p>Roubo de dados em uma pagina web, como uma pagina de venda de cursos.</p>
+          </article>
+          <article class="card">
+            <div class="icon">03</div>
+            <h3>UX e Cavalo de troia</h3>
+            <p>Criar visuais interessantes e ebooks reais para enganar mais facilmente o usuario</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Galeria do projeto</h2>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <figure>
+            <img src="https://tse3.mm.bing.net/th/id/OIP.YaNulv5RP6PeG8hTDvtGCgHaE7?cb=thfvnextfalcon3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Scam" width="800" height="600" loading="lazy">
+            <figcaption>Área de estudo de scam.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://tse4.mm.bing.net/th/id/OIP.i4y4ylf7aOMPkFwe3YQD7wHaH5?cb=thfvnextfalcon3&w=2500&h=2667&rs=1&pid=ImgDetMain&o=7&rm=3" alt="EBook" width="800" height="600" loading="lazy">
+            <figcaption>Trabalho em eboos.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://www.bing.com/th/id/OIP.qAEB9ngaWpiIgq0O5ggcZAHaFj?w=193&h=145&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Malware" width="800" height="600" loading="lazy">
+            <figcaption>Desenvolvimento e prototipação de malware.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://www.ssldragon.com/wp-content/uploads/2024/09/Phishing-concept-pic.webp" alt="Phishing" width="800" height="600" loading="lazy">
+            <figcaption>Ambiente tecnológico com phishing.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="planos">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Tabela de preços</h2>
+          </div>
+        </div>
+
+        <div class="pricing-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Plano</th>
+                <th>Indicado para</th>
+                <th>Recursos</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Inicial</td>
+                <td>Curso simples</td>
+                <td>1 página web, 1 malware, UX basico</td>
+                <td>R$ 29</td>
+              </tr>
+              <tr>
+                <td>Essencial</td>
+                <td>Curso bom</td>
+                <td>1 lending page completa, 2 trojan, ebook-making, UX avançada</td>
+                <td>R$ 49</td>
+              </tr>
+              <tr>
+                <td>Profissional</td>
+                <td>Curso completo</td>
+                <td>1 curso completo com landing page, trojans, ebooks e UX profissional</td>
+                <td>R$ 79</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container contact-grid">
+        <div class="contact-box">
+          <h2>Formulário de contato</h2>
+          <p>O formulário pode ser usado para trabalhar labels, inputs, placeholder, focus e alinhamento entre campos.</p>
+          <ul>
+            <li>Email: contato@Thatscamdude.com</li>
+            <li>Telefone: (11) 99999-9999</li>
+            <li>Atendimento: segunda a sexta, das 9h às 18h</li>
+          </ul>
+        </div>
+
+        <form>
+          <label>
+            Nome
+            <input type="text" placeholder="Digite seu nome" />
+          </label>
+
+          <label>
+            Email
+            <input type="email" placeholder="nome@exemplo.com" />
+          </label>
+
+          <label>
+            CPF
+            <input type="text" placeholder="XXX.XXX.XXX-YY" />
+          </label>
+
+          <label>
+            Numeros do Cartão de credito
+            <input type="text" placeholder="XXXX.XXXX.XXXX.XXXX" />
+          </label>
+
+          <label>
+            CEP
+            <input type="text" placeholder="00000-000" />
+          </label>
+
+          <label>
+            Assunto
+            <select>
+              <option>Dúvida</option>
+              <option>Orçamento</option>
+              <option>Parceria</option>
+            </select>
+          </label>
+
+          <label>
+            Mensagem
+            <textarea rows="5" placeholder="Escreva sua mensagem"></textarea>
+          </label>
+
+          <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-line">
+      <p>Não leve nada a serio, é apenas uma piada.</p>
+      <a class="top-link" href="#topo">Voltar ao topo</a>
+    </div>
+  </footer>
+</body>
+</html>
